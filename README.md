@@ -1,4 +1,4 @@
-# RecAPPture - Admin app
+# RecAPPture - Admin App
 
 ### Web app for managing waste wood offers collected with RecAPPture mobile app.
 
