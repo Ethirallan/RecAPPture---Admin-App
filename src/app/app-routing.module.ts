@@ -6,6 +6,7 @@ import { RejectedComponent } from './components/rejected/rejected.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
@@ -14,7 +15,7 @@ const routes: Routes = [
   {path: 'order/:id', component: OrderDetailsComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: 'orders', pathMatch: 'full'},
-  {path: '**', component: OrdersComponent, canActivate: [AuthGuard]}
+  {path: '**', component: NotFoundComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
