@@ -7,7 +7,7 @@ import { Order } from '../models/order';
 })
 export class OrdersService {
 
-  apiUrl = 'http://88.200.63.178:3000';
+  apiUrl = 'http://88.200.63.178:3001';
   order: Order;
 
   httpOptions = {headers: new HttpHeaders({ 'auth_token': JSON.parse(sessionStorage.getItem('token')) })};
@@ -24,5 +24,11 @@ export class OrdersService {
 
   getOrder(): Order {
     return this.order;
-  } 
+  }
+
+  findUser(mail: string) {
+    this.http.get(this.apiUrl + '/order?email=' + mail, this.httpOptions).subscribe(res => {
+      return res;
+    }, error => {return error;});
+  }
 }
