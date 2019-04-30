@@ -16,7 +16,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment.prod';
-
+import { AngularOpenlayersModule } from "ngx-openlayers";
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { environment } from 'src/environments/environment.prod';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularOpenlayersModule
   ],
   providers: [
     OrdersService

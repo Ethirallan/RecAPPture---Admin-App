@@ -10,4 +10,11 @@ export interface Order {
     order_time: any;
     changed_by: any;
     last_change: any;
+    images: OrderImage[];
+}
+
+export interface OrderImage {
+    id: number;
+    link: string;
+    order_id: number;
 }

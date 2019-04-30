@@ -20,22 +20,13 @@ export class OrdersComponent implements OnInit {
 
   openDetails(order: Order) {
     this.orderService.setOrder(order);
-    var link = '/order/' + order.id;
-    this.router.navigate([link]);
+    this.router.navigate(['/order/', order.id]);
   }
 
   getOrders() {
     this.orderService.getOrders().subscribe(res => {
-      this.orders = res['message']['data'];
+      console.log(res);
+      this.orders = res['data'];
     });
   }
-
-  getWoodType(int: number): string {
-    if (int == 1) {
-      return 'Listavec';
-    } else {
-      return 'Iglavec';
-    }
-  }
-
 }

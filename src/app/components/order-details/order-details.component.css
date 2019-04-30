@@ -1,0 +1,28 @@
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.left,
+.right {
+  height: 90vh;
+}
+
+.right {
+  overflow: hidden;
+  overflow-y: scroll;
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bad12f;
+}
+
+h3, b, p {
+  color: #808080;
+}

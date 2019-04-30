@@ -8,27 +8,32 @@ import { Order } from '../models/order';
 export class OrdersService {
 
   apiUrl = 'http://88.200.63.178:3001';
-  order: Order;
 
   httpOptions = {headers: new HttpHeaders({ 'auth_token': JSON.parse(sessionStorage.getItem('token')) })};
 
   constructor(private http: HttpClient) { }
 
   getOrders() {
-    return this.http.get(this.apiUrl + '/order', this.httpOptions);
+    return this.http.get(this.apiUrl + '/order/complete', this.httpOptions);
+  }
+
+  getOrderByID(id: number) {
+    return this.http.get(this.apiUrl + '/order?id=' + id, this.httpOptions);
   }
 
   setOrder(order: Order) {
-    this.order = order;
+    sessionStorage.setItem('order', JSON.stringify(order));
   }
 
   getOrder(): Order {
-    return this.order;
+    return JSON.parse(sessionStorage.getItem('order'));
   }
 
-  findUser(mail: string) {
-    this.http.get(this.apiUrl + '/order?email=' + mail, this.httpOptions).subscribe(res => {
-      return res;
-    }, error => {return error;});
+  getWoodType(int: number): string {
+    if (int == 1) {
+      return 'Listavec';
+    } else {
+      return 'Iglavec';
+    }
   }
 }
