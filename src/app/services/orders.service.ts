@@ -21,14 +21,6 @@ export class OrdersService {
     return this.http.get(this.apiUrl + '/order?id=' + id, this.httpOptions);
   }
 
-  setOrder(order: Order) {
-    sessionStorage.setItem('order', JSON.stringify(order));
-  }
-
-  getOrder(): Order {
-    return JSON.parse(sessionStorage.getItem('order'));
-  }
-
   getWoodType(int: number): string {
     if (int == 1) {
       return 'Listavec';

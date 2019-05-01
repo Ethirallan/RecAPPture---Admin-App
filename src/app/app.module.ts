@@ -17,6 +17,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment.prod';
 import { AngularOpenlayersModule } from "ngx-openlayers";
+import { FormsModule } from '@angular/forms';
+import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { AngularOpenlayersModule } from "ngx-openlayers";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularOpenlayersModule
+    AngularOpenlayersModule,
+    FormsModule,
+    TextareaAutosizeModule
   ],
   providers: [
     OrdersService
