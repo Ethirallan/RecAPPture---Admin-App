@@ -39,7 +39,11 @@ export class OrderDetailsComponent implements OnInit {
     });
   }
 
-  sendMsg() {
+  acceptOrder() {
     console.log(this.myMessage);
+  }
+
+  rejectOrder() {
+
   }
 }
