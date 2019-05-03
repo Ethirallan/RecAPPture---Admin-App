@@ -10,6 +10,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 export class OrdersComponent implements OnInit {
 
   orders: Order[];
+  loading: boolean = true;
 
   constructor(private orderService: OrdersService) { }
 
@@ -18,8 +19,9 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders() {
-    this.orderService.getOrders().subscribe(res => {
+    this.orderService.getOrders('new').subscribe(res => {
       this.orders = res['data'];
+      this.loading = false;
     });
   }
 }

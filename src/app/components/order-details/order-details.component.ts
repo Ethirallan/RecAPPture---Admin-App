@@ -29,10 +29,11 @@ export class OrderDetailsComponent implements OnInit {
 
   getOrderByID(id: number) {
     this.orderService.getOrderByID(id).subscribe(res => {
-      if (res[0] === undefined) {
+      console.log(res);
+      if (res['data'][0] === undefined) {
         this.notFound = true;
       } else {
-        this.order = res[0];
+        this.order = res['data'][0];
         this.loaded = true;
         this.notFound = false;
       }

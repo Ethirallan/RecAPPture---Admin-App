@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment.prod';
 import { AngularOpenlayersModule } from "ngx-openlayers";
 import { FormsModule } from '@angular/forms';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
+import { LoadingAnimationComponent } from './components/loading-animation/loading-animation.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
     NotFoundComponent,
     RejectedComponent,
     AcceptedComponent,
-    LoginComponent
+    LoginComponent,
+    LoadingAnimationComponent
   ],
   imports: [
     BrowserModule,

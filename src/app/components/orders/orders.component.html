@@ -1,21 +1,24 @@
+<app-loading-animation *ngIf="loading"></app-loading-animation>
+
 <div class="row ml-1 mr-1">
   <div *ngFor="let order of orders" class="col-xl-2 col-md-3 col-sm-6 col-xs-8 mb-3">
     <div class="card h-100">
-      <img class="card-img-top"  style="height: 238px; object-fit: cover;" src="{{ order.images[0].link }}">
+      <img class="card-img-top" style="height: 238px; object-fit: cover;" src="{{ order.images[0].link }}">
       <div class="card-body">
         <h5 class="card-title">Naročilo {{ order.id }}</h5>
         <p class="card-text">
           <b>Vrsta lesa:</b> {{ orderService.getWoodType(order.wood_type) }}
           <br>
-          <b>Količina:</b> {{ order.kub }} m<sup>3</sup>       
+          <b>Količina:</b> {{ order.kub }} m<sup>3</sup>
         </p>
-        <button [routerLink]="['/order', order.id]" class="btn btn-block" style="background-color: #bad12f; color: white;" type="submit">Podrobnosti</button>
+        <button [routerLink]="['/order', order.id]" class="btn btn-block"
+          style="background-color: #bad12f; color: white;" type="submit">Podrobnosti</button>
       </div>
     </div>
   </div>
 </div>
 
-<nav aria-label="Page navigation example">
+<nav *ngIf="!loading" aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Previous">

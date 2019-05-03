@@ -13,12 +13,12 @@ export class OrdersService {
 
   constructor(private http: HttpClient) { }
 
-  getOrders() {
-    return this.http.get(this.apiUrl + '/order/complete', this.httpOptions);
+  getOrders(status: string) {
+    return this.http.get(this.apiUrl + '/order/complete?status=' + status, this.httpOptions);
   }
 
   getOrderByID(id: number) {
-    return this.http.get(this.apiUrl + '/order?id=' + id, this.httpOptions);
+    return this.http.get(this.apiUrl + '/order/complete?id=' + id, this.httpOptions);
   }
 
   getWoodType(int: number): string {
