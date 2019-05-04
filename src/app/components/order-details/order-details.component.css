@@ -9,6 +9,7 @@
 }
 
 .right {
+  background: #fff;
   overflow: hidden;
   overflow-y: scroll;
   text-align: center;

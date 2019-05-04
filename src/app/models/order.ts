@@ -1,6 +1,5 @@
 export interface Order {
     id: number;
-    user_id: number;
     address: string;
     lat: number;
     lng: number;
@@ -10,7 +9,14 @@ export interface Order {
     order_time: any;
     changed_by: any;
     last_change: any;
+    user: User;
     images: OrderImage[];
+}
+
+export interface User {
+    id: number;
+    email: string;
+    phone_number: string;
 }
 
 export interface OrderImage {

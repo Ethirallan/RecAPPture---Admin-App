@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { OrdersService } from "src/app/services/orders.service";
-import { Order } from "src/app/models/order";
+import { Order, OrderImage } from "src/app/models/order";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -10,6 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class OrderDetailsComponent implements OnInit {
   order: Order;
+  myImage: OrderImage;
   sub: any;
   loaded: boolean = false;
   notFound: boolean = false;
@@ -29,7 +30,6 @@ export class OrderDetailsComponent implements OnInit {
 
   getOrderByID(id: number) {
     this.orderService.getOrderByID(id).subscribe(res => {
-      console.log(res);
       if (res['data'][0] === undefined) {
         this.notFound = true;
       } else {

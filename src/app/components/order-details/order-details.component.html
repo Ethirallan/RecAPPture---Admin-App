@@ -13,10 +13,10 @@
               <b>Količina:</b> {{ order.kub }} m<sup>3</sup>
               <br />
               <b>Naslov:</b> {{ order.address }}
-              <br />
-              <b>Email:</b> {{ order.email }}
-              <br />
-              <b>Telefon:</b> {{ order.phone }}
+              <br *ngIf="order.user?.email != null"/>
+              <b *ngIf="order.user?.email != null">Email:</b> {{ order.user?.email }}
+              <br *ngIf="order.user?.phone_number != null"/>
+              <b *ngIf="order.user?.phone_number != null">Telefon:</b> {{ order.user?.phone_number }}
             </p>
           </div>
         </div>
@@ -68,7 +68,7 @@
     <div class="col-lg-6 col-md-12 right">
       <h3>Naložene slike</h3>
       <img *ngFor="let image of order.images" style="width: 100%; margin-top: 10px;"
-        src="{{ image.link }}" alt="" />
+        src="{{ image.link }}" alt="" data-toggle="modal" data-target="#galleryModal" (click)="myImage = image" />
     </div>
   </div>
 </div>
@@ -110,9 +110,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="rejectDialogTitle" style="color: #bad12f;">Zavrni naročilo</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body" style="color: #808080;">
         Ste prepričani, da želite zavrniti naročilo?
@@ -128,3 +125,10 @@
     </div>
   </div>
 </div>
+
+
+<div *ngIf="myImage != null " class="modal fade" id="galleryModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <img src="{{ myImage.link }}" class="img-fluid" alt=""/>
+    </div>
+  </div>
