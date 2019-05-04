@@ -1,6 +1,6 @@
 <nav *ngIf="auth.isAdminHere()" class="navbar navbar-expand-md navbar-light mb-3">
     <div class="container-fluid">
-        <a routerLink="/orders" class="navbar-brand">
+        <a routerLink="/nova" class="navbar-brand">
             <img src="../../../assets/icon.png" width="34" height="34" alt="" class="mb-2">
             <span>Re</span>cAPPture
         </a>
@@ -11,22 +11,25 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item mr-3 mt-1">
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Vnesi email" aria-label="Search">
-                        <button class="btn my-2 my-sm-0" style="color: white; background-color: #808080;" type="submit">Najdi</button>
+                        <input class="form-control mr-sm-2" [(ngModel)]="searchMail" name="searchMail" type="search" placeholder="Vnesi email" aria-label="Search">
+                        <button class="btn my-2 my-sm-0" (click)="findUser()" style="color: white; background-color: #808080;" type="submit">Najdi</button>
                     </form>
                 </li>
                 <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-                    <a routerLink="/orders" class="nav-link">Naročila</a>
+                    <a routerLink="/nova" class="nav-link">Nova</a>
                 </li>
                 <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-                    <a routerLink="/accepted" class="nav-link">Sprejeta</a>
+                    <a routerLink="/cakajoca" class="nav-link">Čakajoča</a>
                 </li>
                 <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-                    <a routerLink="/rejected" class="nav-link">Zavrnjena</a>
+                    <a routerLink="/zavrnjena" class="nav-link">Zavrnjena</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                        <a routerLink="/koncana" class="nav-link">Končana</a>
                 </li>
                 <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
                         <a (click)="auth.signOut()" class="nav-link">Odjava</a>
-                    </li>
+                </li>
             </ul>
         </div>
     </div>

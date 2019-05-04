@@ -8,7 +8,6 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RejectedComponent } from './components/rejected/rejected.component';
-import { AcceptedComponent } from './components/accepted/accepted.component';
 import { OrdersService } from './services/orders.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
@@ -20,6 +19,8 @@ import { AngularOpenlayersModule } from "ngx-openlayers";
 import { FormsModule } from '@angular/forms';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 import { LoadingAnimationComponent } from './components/loading-animation/loading-animation.component';
+import { WaitingComponent } from './components/waiting/waiting.component';
+import { DoneComponent } from './components/done/done.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +30,10 @@ import { LoadingAnimationComponent } from './components/loading-animation/loadin
     OrderDetailsComponent,
     NotFoundComponent,
     RejectedComponent,
-    AcceptedComponent,
     LoginComponent,
-    LoadingAnimationComponent
+    LoadingAnimationComponent,
+    WaitingComponent,
+    DoneComponent
   ],
   imports: [
     BrowserModule,

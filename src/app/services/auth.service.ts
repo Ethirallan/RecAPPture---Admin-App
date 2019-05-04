@@ -28,7 +28,7 @@ export class AuthService {
     this.http.post(this.apiUrl + '/auth/google', body).subscribe(res => {
       this.error = false;
       sessionStorage.setItem('token', JSON.stringify(res['message']));
-      this.router.navigate(['/orders']);
+      this.router.navigate(['/nova']);
     }, error => this.error = true);
   }
 
@@ -42,6 +42,6 @@ export class AuthService {
   async signOut() {
     await this.afAuth.auth.signOut();
     sessionStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/prijava']);
   }
 }

@@ -8,6 +8,8 @@
             <p>
               <b>Datum:</b> {{ order.order_time | date: "d. M. yyyy" }}
               <br />
+              <b>Status:</b> {{ getStatus(order.status) }}
+              <br />
               <b>Vrsta lesa:</b> {{ orderService.getWoodType(order.wood_type) }}
               <br />
               <b>Količina:</b> {{ order.kub }} m<sup>3</sup>
@@ -32,7 +34,7 @@
               Sprejmi
             </button>
             <br />
-            <button routerLink="/orders" class="btn" type="button"
+            <button routerLink="/nova" class="btn" type="button"
               style="background-color: #808080; color: white; width: 100%; margin-top: 10px;">
               Nazaj
             </button>
@@ -86,6 +88,10 @@
           <label for="recipient-name" class="col-form-label" style="color: #808080;">Prejemnik:</label>
           <p>{{ order?.address }}</p>
           <div class="form-group">
+              <label for="email-subject" class="col-form-label" style="color: #808080;">Sporočilo:</label>
+              <input type="text" class="form-control" name="subject" [(ngModel)]="mySubject" required>
+          </div>
+          <div class="form-group">
             <label for="email-body" class="col-form-label" style="color: #808080;">Sporočilo:</label>
             <textarea autosize style="min-height: 160px;" class="form-control" [(ngModel)]="myMessage"
               name="message"></textarea>
@@ -96,7 +102,7 @@
         <button type="button" class="btn" style="color:white; background-color: #808080;" data-dismiss="modal">
           Prekliči
         </button>
-        <button type="submit" (click)="acceptOrder()" class="btn" style="color:white; background-color: #bad12f;">
+        <button type="submit" (click)="acceptOrder()" data-dismiss="modal" class="btn" style="color:white; background-color: #bad12f;">
           Pošlji
         </button>
       </div>
@@ -118,7 +124,7 @@
         <button type="button" class="btn" style="color:white; background-color: #808080;" data-dismiss="modal">
           Prekliči
         </button>
-        <button type="submit" (click)="rejectOrder()" class="btn" style="color:white; background-color: #bad12f;">
+        <button type="submit" (click)="rejectOrder()" data-dismiss="modal" class="btn" style="color:white; background-color: #bad12f;">
           Zavrni
         </button>
       </div>
@@ -126,9 +132,8 @@
   </div>
 </div>
 
-
 <div *ngIf="myImage != null " class="modal fade" id="galleryModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <img src="{{ myImage.link }}" class="img-fluid" alt=""/>
     </div>
-  </div>
+</div>

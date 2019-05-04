@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +9,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  searchMail: string;
+
+  constructor(private auth: AuthService, private orderService: OrdersService) { }
 
   ngOnInit() {
+  }
+
+  findUser() {
+    this.orderService.getOrdersByEmail(this.searchMail).subscribe(res => {
+      console.log(res);
+    }, error => console.log(error));
   }
 
 }

@@ -3,11 +3,11 @@ import { Order } from 'src/app/models/order';
 import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
-  selector: 'app-rejected',
-  templateUrl: './rejected.component.html',
-  styleUrls: ['./rejected.component.css']
+  selector: 'app-done',
+  templateUrl: './done.component.html',
+  styleUrls: ['./done.component.css']
 })
-export class RejectedComponent implements OnInit {
+export class DoneComponent implements OnInit {
 
   orders: Order[];
   loading: boolean = true;
@@ -20,7 +20,7 @@ export class RejectedComponent implements OnInit {
   }
 
   getOrders() {
-    this.orderService.getOrders('rejected').subscribe((res: Order[]) => {
+    this.orderService.getOrders('done').subscribe((res: Order[]) => {
       if (res.length == 0) {
         if (this.orderService.getCurrentPage() != 1) {
           this.prevPage();
@@ -29,7 +29,7 @@ export class RejectedComponent implements OnInit {
         }
       } else {
         this.orders = res;
-      this.loading = false;
+        this.loading = false;
       }
     }, error => console.log(error));
   }

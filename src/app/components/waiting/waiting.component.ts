@@ -3,11 +3,11 @@ import { Order } from 'src/app/models/order';
 import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
-  selector: 'app-rejected',
-  templateUrl: './rejected.component.html',
-  styleUrls: ['./rejected.component.css']
+  selector: 'app-waiting',
+  templateUrl: './waiting.component.html',
+  styleUrls: ['./waiting.component.css']
 })
-export class RejectedComponent implements OnInit {
+export class WaitingComponent implements OnInit {
 
   orders: Order[];
   loading: boolean = true;
@@ -20,7 +20,7 @@ export class RejectedComponent implements OnInit {
   }
 
   getOrders() {
-    this.orderService.getOrders('rejected').subscribe((res: Order[]) => {
+    this.orderService.getOrders('waiting').subscribe((res: Order[]) => {
       if (res.length == 0) {
         if (this.orderService.getCurrentPage() != 1) {
           this.prevPage();
@@ -51,3 +51,4 @@ export class RejectedComponent implements OnInit {
     this.getOrders();
   }
 }
+
