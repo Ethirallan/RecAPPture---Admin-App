@@ -8,15 +8,15 @@ export class OrdersService {
 
   apiUrl = 'http://88.200.63.178:3001';
 
-  httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json', 'auth_token': JSON.parse(sessionStorage.getItem('token')) })};
+  httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json', 'auth_token': JSON.parse(sessionStorage.getItem('token')), responseType: 'text', observe: 'response' })};
 
   constructor(private http: HttpClient) { }
 
   getOrders(status: string) {
     if (!('page' in sessionStorage)) {
-      this.setPage(1); 
+      this.setPage(1);
     }
-    return this.http.get(this.apiUrl + '/order/complete?status=' + status + '&limit=6&page=' + JSON.parse(sessionStorage.getItem('page')), this.httpOptions);
+    return this.http.get(this.apiUrl + '/order/complete?status=' + status + '&limit=12&page=' + JSON.parse(sessionStorage.getItem('page')), {headers: new HttpHeaders({ 'Content-Type': 'application/json', 'auth_token': JSON.parse(sessionStorage.getItem('token')), responseType: 'text', observe: 'response' })});
   }
 
   getOrderByID(id: number) {

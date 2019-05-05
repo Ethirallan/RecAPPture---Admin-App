@@ -16,6 +16,7 @@ export class OrdersComponent implements OnInit {
   constructor(private orderService: OrdersService) { }
 
   ngOnInit() {
+    this.orderService.setPage(1);
     this.getOrders();
   }
 
