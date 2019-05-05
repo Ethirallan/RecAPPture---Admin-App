@@ -10,14 +10,16 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router) { }
-
+  
+  // Checks if admin is logged in
   ngOnInit() {
     this.checkIfLoggedIn();
   }
 
+  // Checks if admin is logged in and then navigating to /novo - new orders; else return false
   checkIfLoggedIn() {
     if (this.auth.isAdminHere()) {
-      this.router.navigate(['/orders']);
+      this.router.navigate(['/nova']);
       return true;
     } else {
       return false;

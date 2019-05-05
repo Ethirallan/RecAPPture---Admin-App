@@ -24,15 +24,20 @@ export class OrderDetailsComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
+  // Get the order id from the router and get order details for this order
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.getOrderByID(params["id"]);
     });
   }
 
+  /**
+   * Subscribe to http request for getting the order with given id.
+   * If the response is undefined, then it sets notFound to true;
+   * else it sets this.order to response value, this.loaded to true and this.notFound to false.
+   */
   getOrderByID(id: number) {
     this.orderService.getOrderByID(id).subscribe(res => {
-      console.log(res);
       if (res[0] === undefined) {
         this.notFound = true;
       } else {
@@ -43,18 +48,21 @@ export class OrderDetailsComponent implements OnInit {
     }, error => console.log(error));
   }
 
+  // Use http request to accept an order and informs the user with an email
   acceptOrder() {
     this.orderService.processOrder(this.order.id, 'waiting', this.mySubject, this.myMessage).subscribe(res => {
       console.log(res);
     }, error => console.log(error));
   }
 
+  // Use http request to reject an order and informs the user with an email
   rejectOrder() {
     this.orderService.processOrder(this.order.id, 'rejected', 'Zavrnitev naročila', this.rejectMessage).subscribe(res => {
       console.log(res);
     }, error => console.log(error));
   }
 
+  // Translates status string into slovene and returns it.
   getStatus(status: string) {
     if (status == 'new') {
       return 'Novo';

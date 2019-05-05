@@ -6,6 +6,12 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
+/**
+ * nova, zavrnjena, cakajoca and koncana are using same component - grid system for displaying orders.
+ * Each one has a static status value, which determines which order will be returned from the server.
+ * All paths but prijava ~ login are protected with AuthGuard.
+ */
+
 const routes: Routes = [
   {path: 'nova', component: OrdersComponent, canActivate: [AuthGuard], data : { status : 'new' }},
   {path: 'zavrnjena', component: OrdersComponent, canActivate: [AuthGuard], data : { status : 'rejected' }},
@@ -13,7 +19,7 @@ const routes: Routes = [
   {path: 'koncana', component: OrdersComponent, canActivate: [AuthGuard], data : { status : 'done' }},
   {path: 'narocilo/:id', component: OrderDetailsComponent, canActivate: [AuthGuard]},
   {path: 'prijava', component: LoginComponent},
-  {path: '', redirectTo: 'prijava', pathMatch: 'full'},
+  {path: '', redirectTo: 'nova', pathMatch: 'full'},
   {path: '**', component: NotFoundComponent, canActivate: [AuthGuard]}
 ];
 

@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Get orders posted by user with given email
   findUser() {
     this.orderService.getOrdersByEmail(this.searchMail).subscribe(res => {
       console.log(res);

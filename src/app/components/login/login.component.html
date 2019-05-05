@@ -1,4 +1,4 @@
-<div *ngIf="auth.isAdminHere() | async; else guest"></div>
+<div *ngIf="auth.isAdminHere(); else guest"></div>
 
 <ng-template #guest>
         <div class="col-12" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
