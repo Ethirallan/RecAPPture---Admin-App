@@ -26,7 +26,7 @@
         <span class="sr-only">Previous</span>
       </a>
     </li>
-    <li *ngFor="let page of orderService.getPages()" [ngClass]="{active: orderService.getCurrentPage() === page}" class="page-item"><a class="page-link" (click)="getPage(page)">{{ page }}</a></li>
+    <li *ngFor="let page of getPages()" [ngClass]="{active: getCurrentPage() === page}" class="page-item"><a class="page-link" (click)="getPage(page)">{{ page }}</a></li>
     <li class="page-item">
       <a class="page-link" (click)="nextPage()" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
@@ -38,6 +38,6 @@
 
 <ng-template #noOrders>
   <div class="d-flex justify-content-center" style="align-items: center; height: 80vh;">
-      <h2 style="color: #808080;">Ni novih naročil</h2>
+      <h2 style="color: #808080;">{{ showEmptyText() }}</h2>
   </div>
 </ng-template>

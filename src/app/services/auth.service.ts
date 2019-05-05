@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   apiUrl = 'http://88.200.63.178:3001';
   error: boolean = false;
+  msg: string;
 
   constructor(
       private afAuth: AngularFireAuth,
@@ -29,7 +30,14 @@ export class AuthService {
       this.error = false;
       sessionStorage.setItem('token', JSON.stringify(res['message']));
       this.router.navigate(['/nova']);
-    }, error => this.error = true);
+    }, error => {
+      if (error.statusText == 'Unauthorized') {
+        this.msg = 'Uporabljeni Gmail račun nima administatorskih pravic!';
+      } else {
+        this.msg = 'Težave pri povezovanju s serverjem. Prosimo poskusite ponovno kasneje.';
+      }
+      this.error = true;
+    });
   }
 
   isAdminHere(): boolean {

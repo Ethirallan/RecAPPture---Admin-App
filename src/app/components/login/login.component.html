@@ -5,12 +5,12 @@
                 <div class="text-center">
                         <img src="../../../assets/icon.png" style="height: 300px;" alt="">
                         <div style="height: 100px;"></div>
-                        <button class="btn" style="background-color: #bad12f; color: white; font-size: 30px;" (click)="auth.googleSignin()">
-                            <i class="fa fa-google"></i>    Prijava
+                        <button class="btn btn-outline-dark" style="background-color: white; border-color:#bad12f; color: #bad12f; font-size: 30px;" (click)="auth.googleSignin()">
+                            <i class="fa fa-google" style="color: #bad12f;"></i>    Prijava
                         </button>
                         <br>
                         <br>
-                        <h4 *ngIf="auth.error">Uporabljeni Gmail račun nima administatorskih pravic!</h4>
+                        <h4 *ngIf="auth.error" style="color: #808080;">{{ auth.msg }}</h4>
                 </div>
         </div>
 </ng-template>
