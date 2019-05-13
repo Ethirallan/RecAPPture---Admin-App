@@ -19,7 +19,7 @@ export class OrdersService {
     if (!(status + 'page' in sessionStorage)) {
       this.setPage(1, status);
     }
-    return this.http.get(this.apiUrl + '/order/complete?status=' + status + '&limit=4&page=' + JSON.parse(sessionStorage.getItem(status + 'page')), { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'auth_token': JSON.parse(sessionStorage.getItem('token'))})});
+    return this.http.get(this.apiUrl + '/order/complete?status=' + status + '&limit=12&page=' + JSON.parse(sessionStorage.getItem(status + 'page')), { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'auth_token': JSON.parse(sessionStorage.getItem('token'))})});
   }
 
   // Returns http request for getting order by given id

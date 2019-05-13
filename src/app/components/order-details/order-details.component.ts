@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { OrdersService } from "src/app/services/orders.service";
-import { Order, OrderImage } from "src/app/models/order";
+import { Order, OrderImage, MyResp } from "src/app/models/order";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -37,11 +37,11 @@ export class OrderDetailsComponent implements OnInit {
    * else it sets this.order to response value, this.loaded to true and this.notFound to false.
    */
   getOrderByID(id: number) {
-    this.orderService.getOrderByID(id).subscribe(res => {
-      if (res[0] === undefined) {
+    this.orderService.getOrderByID(id).subscribe((res: MyResp) => {
+      if (res === undefined) {
         this.notFound = true;
       } else {
-        this.order = res[0];
+        this.order = res.data[0];
         this.loaded = true;
         this.notFound = false;
       }

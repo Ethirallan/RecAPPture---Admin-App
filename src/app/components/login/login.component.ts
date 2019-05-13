@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, public router: Router) { }
   
   // Checks if admin is logged in
   ngOnInit() {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/models/order';
+import { Order, MyResp } from 'src/app/models/order';
 import { OrdersService } from 'src/app/services/orders.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -14,6 +14,7 @@ export class OrdersComponent implements OnInit {
   loading: boolean = true;
   page: number
   status: string;
+  total: number;
 
   constructor(private orderService: OrdersService, private route: ActivatedRoute) { }
 
@@ -24,20 +25,21 @@ export class OrdersComponent implements OnInit {
   }
 
   /**
-   * Subscribes to orderService.getOrders with status parameter and gets back an array of Order(s).
+   * Subscribes to orderService.getOrders with status parameter and gets back an paginationButtonsay of Order(s).
    * If response's length is 0, then it checks if the current page is 1 and if not it calls prevPage();
    * else it assigns response to this.orders and sets loading to false.
    */
   getOrders() {
-    this.orderService.getOrders(this.status).subscribe((res: Order[]) => {
-      if (res.length == 0) {
+    this.orderService.getOrders(this.status).subscribe((res: MyResp) => {
+      if (res.data.length == 0) {
         if (this.getCurrentPage() != 1) {
           this.prevPage();
         } else {
           this.loading = false;
         }
       } else {
-        this.orders = res;
+        this.orders = res.data;
+        this.total = res.total;
         this.loading = false;
       }
     }, error => console.log(error));
@@ -63,7 +65,7 @@ export class OrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  // If orders array is empty, then we need to display a text, which is different for each possible status valeu. This function return that text
+  // If orders paginationButtonsay is empty, then we need to display a text, which is different for each possible status valeu. This function return that text
   showEmptyText() {
     if (this.status == 'new') {
       return 'Ni novih naročil';
@@ -83,19 +85,38 @@ export class OrdersComponent implements OnInit {
 
   /**
    * Function for determining pagination buttons.
-   * First it checks if there is a page in sessionStorage for orders state, otherwise setting its value to 1.
-   * Then it makes a new var - page whick holds the value from sessionStorage.
-   * In the end it returns int[] containing page numbers which will be displayed as buttons.
+   * First it calculates the last page - noOfPages.
+   * Then it checks if there is a page in sessionStorage for orders state, otherwise setting its value to 1.
+   * Then it makes a new var - page whick holds the value from sessionStorage and an empty array (which will contain "buttons").
+   * Then it pushes a "button" on the array for every value up to the noOfPages.
+   * In the end it determines and returns int[] containing page numbers which will be displayed as buttons.
    */
   getPages(): number[] {
+    var noOfPages = Math.ceil(this.total / 12); //12 is the limit - no of orders per page
+
     if (!(this.status + 'page' in sessionStorage)) {
       this.orderService.setPage(1, status); 
     }
+
     var page = JSON.parse(sessionStorage.getItem(this.status + 'page'));
-    if (page < 3) {
-      return [1, 2, 3];
+
+    var paginationButtons = [];
+
+    for (let i = 0; i < noOfPages; i++) {
+      paginationButtons.push(i + 1);
+    }
+
+    if (paginationButtons.length <= 3) {
+      return paginationButtons;
     } else {
-      return [page - 1, page, page + 1];
+      if (page == 1) {
+        return [1, 2, 3];
+      } else if (page == noOfPages) {
+        return [page - 2, page - 1, page];
+      } else {
+        var middle = paginationButtons.indexOf(page) + 1;
+        return [middle - 1, middle, middle + 1];
+      }
     }
   }
 }

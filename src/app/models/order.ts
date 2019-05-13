@@ -1,3 +1,9 @@
+export interface MyResp {
+    total: number;
+    data: Order[];
+}
+
+
 export interface Order {
     id: number;
     address: string;

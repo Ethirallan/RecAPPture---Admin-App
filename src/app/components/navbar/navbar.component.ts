@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
 
   searchMail: string;
 
-  constructor(private auth: AuthService, private orderService: OrdersService) { }
+  constructor(public auth: AuthService, public orderService: OrdersService) { }
 
   ngOnInit() {
   }
