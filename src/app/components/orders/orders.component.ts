@@ -15,6 +15,7 @@ export class OrdersComponent implements OnInit {
   page: number
   status: string;
   total: number;
+  noOfPages: number;
 
   constructor(private orderService: OrdersService, private route: ActivatedRoute) { }
 
@@ -40,6 +41,7 @@ export class OrdersComponent implements OnInit {
       } else {
         this.orders = res.data;
         this.total = res.total;
+        this.noOfPages = Math.ceil(this.total / 12); //12 is the limit - no of orders per page
         this.loading = false;
       }
     }, error => console.log(error));
@@ -47,8 +49,11 @@ export class OrdersComponent implements OnInit {
 
   // Increase page value for orders state in sessionStorage by one and then calls getOrder() to get orders from the next page
   nextPage() {
-    this.orderService.setPage(JSON.parse(sessionStorage.getItem(this.status + 'page')) + 1, this.status);
-    this.getOrders();
+    var page = JSON.parse(sessionStorage.getItem(this.status + 'page'));
+    if (page < this.noOfPages) {
+      this.orderService.setPage(page + 1, this.status);
+      this.getOrders();
+    }
   }
 
   // Decrease page value for orders state in sessionStorage by one and then calls getOrder() to get orders from the prev page
@@ -92,8 +97,6 @@ export class OrdersComponent implements OnInit {
    * In the end it determines and returns int[] containing page numbers which will be displayed as buttons.
    */
   getPages(): number[] {
-    var noOfPages = Math.ceil(this.total / 12); //12 is the limit - no of orders per page
-
     if (!(this.status + 'page' in sessionStorage)) {
       this.orderService.setPage(1, status); 
     }
@@ -102,7 +105,7 @@ export class OrdersComponent implements OnInit {
 
     var paginationButtons = [];
 
-    for (let i = 0; i < noOfPages; i++) {
+    for (let i = 0; i < this.noOfPages; i++) {
       paginationButtons.push(i + 1);
     }
 
@@ -111,7 +114,7 @@ export class OrdersComponent implements OnInit {
     } else {
       if (page == 1) {
         return [1, 2, 3];
-      } else if (page == noOfPages) {
+      } else if (page == this.noOfPages) {
         return [page - 2, page - 1, page];
       } else {
         var middle = paginationButtons.indexOf(page) + 1;

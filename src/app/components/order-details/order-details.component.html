@@ -26,17 +26,15 @@
         </div>
         <div class="col-lg-6 col-md-12" style="display: flex; align-items: center; flex-wrap: wrap;">
           <div style="width: 100%;">
-              <button class="btn" data-toggle="modal" data-target="#rejectModal" type="button"
+              <button *ngIf="order.status == 'new' || order.status == 'waiting'" class="btn" data-toggle="modal" data-target="#rejectModal" type="button"
               style="background-color: red; color: white; width: 100%;">
               Zavrni
             </button>
-            <br />
-            <button class="btn" data-toggle="modal" data-target="#acceptModal" type="button"
+            <button *ngIf="order.status == 'new' || order.status == 'rejected'" class="btn" data-toggle="modal" data-target="#acceptModal" type="button"
               style="background-color: #bad12f; color: white; width: 100%; margin-top: 10px;">
               Sprejmi
             </button>
-            <br />
-            <button routerLink="/nova" class="btn" type="button"
+            <button (click)="backClicked()" class="btn" type="button"
               style="background-color: #808080; color: white; width: 100%; margin-top: 10px;">
               Nazaj
             </button>

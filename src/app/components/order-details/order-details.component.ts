@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { OrdersService } from "src/app/services/orders.service";
 import { Order, OrderImage, MyResp } from "src/app/models/order";
 import { ActivatedRoute } from "@angular/router";
+import {Location} from '@angular/common';
 
 @Component({
   selector: "app-order-details",
@@ -21,7 +22,8 @@ export class OrderDetailsComponent implements OnInit {
 
   constructor(
     private orderService: OrdersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   // Get the order id from the router and get order details for this order
@@ -51,14 +53,14 @@ export class OrderDetailsComponent implements OnInit {
   // Use http request to accept an order and informs the user with an email
   acceptOrder() {
     this.orderService.processOrder(this.order.id, 'waiting', this.mySubject, this.myMessage).subscribe(res => {
-      console.log(res);
+      this.backClicked();
     }, error => console.log(error));
   }
 
   // Use http request to reject an order and informs the user with an email
   rejectOrder() {
     this.orderService.processOrder(this.order.id, 'rejected', 'Zavrnitev naročila', this.rejectMessage).subscribe(res => {
-      console.log(res);
+      this.backClicked();
     }, error => console.log(error));
   }
 
@@ -73,5 +75,10 @@ export class OrderDetailsComponent implements OnInit {
     } else {
       return 'Čaka';
     }
+  }
+
+  // Go to last page
+  backClicked() {
+    this.location.back();
   }
 }
