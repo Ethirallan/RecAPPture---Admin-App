@@ -14,10 +14,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment.prod';
-import { AngularOpenlayersModule } from "ngx-openlayers";
 import { FormsModule } from '@angular/forms';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 import { LoadingAnimationComponent } from './components/loading-animation/loading-animation.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { LoadingAnimationComponent } from './components/loading-animation/loadin
     OrderDetailsComponent,
     NotFoundComponent,
     LoginComponent,
-    LoadingAnimationComponent
+    LoadingAnimationComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,6 @@ import { LoadingAnimationComponent } from './components/loading-animation/loadin
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularOpenlayersModule,
     FormsModule,
     TextareaAutosizeModule
   ],

@@ -1,15 +1,21 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { OrdersService } from "src/app/services/orders.service";
 import { Order, OrderImage, MyResp } from "src/app/models/order";
 import { ActivatedRoute } from "@angular/router";
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: "app-order-details",
   templateUrl: "./order-details.component.html",
   styleUrls: ["./order-details.component.css"]
 })
+
 export class OrderDetailsComponent implements OnInit {
+
+  @ViewChild("map")
+  public mapElement: MapComponent;
+
   order: Order;
   myImage: OrderImage;
   sub: any;
@@ -32,6 +38,7 @@ export class OrderDetailsComponent implements OnInit {
       this.getOrderByID(params["id"]);
     });
   }
+  
 
   /**
    * Subscribe to http request for getting the order with given id.
