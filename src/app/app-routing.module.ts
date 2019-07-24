@@ -5,6 +5,7 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { MapOfOrdersComponent } from './components/map-of-orders/map-of-orders.component';
 
 /**
  * nova, zavrnjena, cakajoca and koncana are using same component - grid system for displaying orders.
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'cakajoca', component: OrdersComponent, canActivate: [AuthGuard], data : { status : 'waiting' }},
   {path: 'koncana', component: OrdersComponent, canActivate: [AuthGuard], data : { status : 'done' }},
   {path: 'narocilo/:id', component: OrderDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'zemljevid', component: MapOfOrdersComponent, canActivate: [AuthGuard]},
   {path: 'prijava', component: LoginComponent},
   {path: '', redirectTo: 'nova', pathMatch: 'full'},
   {path: '**', component: NotFoundComponent, canActivate: [AuthGuard]}

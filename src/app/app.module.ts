@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 import { LoadingAnimationComponent } from './components/loading-animation/loading-animation.component';
 import { MapComponent } from './components/map/map.component';
+import { MapOfOrdersComponent } from './components/map-of-orders/map-of-orders.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MapComponent } from './components/map/map.component';
     NotFoundComponent,
     LoginComponent,
     LoadingAnimationComponent,
-    MapComponent
+    MapComponent,
+    MapOfOrdersComponent
   ],
   imports: [
     BrowserModule,

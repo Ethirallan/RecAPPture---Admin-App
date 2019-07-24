@@ -34,7 +34,6 @@ export class MapComponent implements OnInit {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
 
-
     let marker = new L.Marker([this.lat, this.lng], {
       icon: L.icon({
          iconSize: [ 60, 60 ],
@@ -45,8 +44,5 @@ export class MapComponent implements OnInit {
       })
     });
     marker.addTo(this.map);
-    // L.marker([this.lat, this.lng]).addTo(this.map)
-    // .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    // .openPopup();
   }
 }
