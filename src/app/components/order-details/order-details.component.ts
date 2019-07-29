@@ -4,6 +4,7 @@ import { Order, OrderImage, MyResp } from "src/app/models/order";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from '@angular/common';
 import { MapComponent } from '../map/map.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-order-details",
@@ -29,7 +30,8 @@ export class OrderDetailsComponent implements OnInit {
   constructor(
     private orderService: OrdersService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private toastr: ToastrService
   ) { }
 
   // Get the order id from the router and get order details for this order
@@ -60,27 +62,29 @@ export class OrderDetailsComponent implements OnInit {
   // Use http request to accept an order and informs the user with an email
   acceptOrder() {
     this.orderService.processOrder(this.order.id, 'waiting', this.mySubject, this.myMessage).subscribe(res => {
+      this.toastr.success('Naročilo je bilo uspešno sprejeto.', 'Sprejem naročila');
       this.backClicked();
-    }, error => console.log(error));
+    }, error => this.toastr.error('Težave pri sprejemu naročila. Prosimo, poskusite ponovno kasneje.', 'Sprejem naročila'));
   }
 
   // Use http request to reject an order and informs the user with an email
   rejectOrder() {
     this.orderService.processOrder(this.order.id, 'rejected', 'Zavrnitev naročila', this.rejectMessage).subscribe(res => {
+      this.toastr.success('Naročilo je bilo uspešno zavrnjeno.', 'Zavrnitev naročila');
       this.backClicked();
-    }, error => console.log(error));
+    }, error => this.toastr.error('Težave pri zavrnitvi naročila. Prosimo, poskusite ponovno kasneje.', 'Zavrnitev naročila'));
   }
 
   // Translates status string into slovene and returns it.
   getStatus(status: string) {
     if (status == 'new') {
-      return 'Novo';
+      return 'Novo naročilo';
     } else if (status == 'done') {
-      return 'Zaključeno';
+      return 'Zaključeno naročilo';
     } else if (status == 'rejected') {
-      return 'Zavrnjeno';
+      return 'Zavrnjeno naročilo';
     } else {
-      return 'Čaka';
+      return 'Čakajoče naročilo';
     }
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/services/orders.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare var L: any;
 
@@ -18,7 +19,7 @@ export class MapOfOrdersComponent implements OnInit {
 
   bla: any = [];
 
-  constructor(private orderService: OrdersService) { }
+  constructor(private orderService: OrdersService, private toastr: ToastrService) { }
 
   ngOnInit() {
 
@@ -34,7 +35,6 @@ export class MapOfOrdersComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.mapOfOrders);
 
     this.orderService.getAllOrders().subscribe(res => {
-      console.log(res['data'][0]);
       res['data'].forEach(point => {
         let marker = new L.Marker([point.lat, point.lng], {
           icon: L.icon({
@@ -44,12 +44,13 @@ export class MapOfOrdersComponent implements OnInit {
              popupAnchor: [13, -51]
           })
         });
-        marker.bindPopup('<b>Naročilo ' +  point.id + '<br>Lokacija:</b> ' +  point.address + '<br><b>Vrsta lesa:</b> ' + this.orderService.getWoodType(point.wood_type) + '<br><b>Količina:</b> ' + point.kub + ' &#x33a5;');
+        marker.bindPopup('<p style="font-size: 16px;"><b style="font-size: 18px;">Naročilo ' +  point.id + '<br>Lokacija:</b> ' +  point.address + '<br><b>Vrsta lesa:</b> ' + this.orderService.getWoodType(point.wood_type) + '<br><b>Količina:</b> ' + point.kub + ' &#x33a5;</p>' + 
+        '<button class="btn btn-block"style="background-color: #bad12f; color: white;" type="submit"><a style="color: white; text-decoration: none;" href="/narocilo/' + point.id + '">Podrobnosti</a></button>');
 
         marker.addTo(this.mapOfOrders);
       });
     }, error => {
-      console.log(error);
+      this.toastr.error('Težave pri povezovanju s strežnikom. Prosimo, poskusite kasneje.', 'Opala ...');
     });
   }
 }

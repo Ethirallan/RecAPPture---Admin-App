@@ -36,11 +36,9 @@ export class MapComponent implements OnInit {
 
     let marker = new L.Marker([this.lat, this.lng], {
       icon: L.icon({
-         iconSize: [ 60, 60 ],
-         iconAnchor: [ 13, 41 ],
-         iconUrl: 'assets/marker.png'
-        //  iconUrl: 'assets/leaflet/images/marker-icon.png',
-        //  shadowUrl: 'assets/leaflet/images/marker-shadow.png'
+        iconSize: [ 50, 70 ],
+        iconAnchor: [ 13, 51 ],
+        iconUrl: 'assets/REmarker.png',
       })
     });
     marker.addTo(this.map);

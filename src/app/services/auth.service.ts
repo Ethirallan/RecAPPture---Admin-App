@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,12 @@ export class AuthService {
 
   apiUrl = 'http://88.200.63.178:3001';
   error: boolean = false;
-  msg: string;
 
   constructor(
       private afAuth: AngularFireAuth,
       private router: Router,
-      private http: HttpClient
+      private http: HttpClient, 
+      private toastr: ToastrService
   ) {}
 
   /**
@@ -38,9 +39,9 @@ export class AuthService {
       this.router.navigate(['/nova']);
     }, error => {
       if (error.statusText == 'Unauthorized') {
-        this.msg = 'Uporabljeni Gmail račun nima administatorskih pravic!';
+        this.toastr.error('Uporabljeni Gmail račun nima administatorskih pravic!', 'Napaka');
       } else {
-        this.msg = 'Težave pri povezovanju s serverjem. Prosimo poskusite ponovno kasneje.';
+        this.toastr.error('Težave pri povezovanju s serverjem. Prosimo poskusite ponovno kasneje.', 'Opala ...');
       }
       this.error = true;
     });
