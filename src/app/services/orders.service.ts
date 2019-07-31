@@ -26,6 +26,10 @@ export class OrdersService {
     return this.http.get(this.apiUrl + '/order/complete', { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'auth_token': JSON.parse(sessionStorage.getItem('token'))})});
   }
 
+  getRoute() {
+    return this.http.get(this.apiUrl + '/routes/latest', { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'auth_token': JSON.parse(sessionStorage.getItem('token'))})});
+  }
+
   // Returns http request for getting order by given id
   getOrderByID(id: number) {
     return this.http.get(this.apiUrl + '/order/complete?id=' + id, {headers: new HttpHeaders({ 'Content-Type': 'application/json', 'auth_token': JSON.parse(sessionStorage.getItem('token')), responseType: 'text', observe: 'response' })});

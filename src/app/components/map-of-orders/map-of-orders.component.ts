@@ -34,7 +34,7 @@ export class MapOfOrdersComponent implements OnInit {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.mapOfOrders);
 
-    this.orderService.getAllOrders().subscribe(res => {
+    this.orderService.getRoute().subscribe(res => {
       res['data'].forEach(point => {
         let marker = new L.Marker([point.lat, point.lng], {
           icon: L.icon({
