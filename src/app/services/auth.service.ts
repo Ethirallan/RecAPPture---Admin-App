@@ -4,13 +4,14 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  apiUrl = 'http://88.200.63.178:3001';
+  apiUrl = environment.apiUrl;
   error: boolean = false;
 
   constructor(
